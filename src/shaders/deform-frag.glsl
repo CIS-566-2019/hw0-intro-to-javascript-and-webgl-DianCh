@@ -27,6 +27,15 @@ out vec4 out_Col; // This is the final output color that you will see on your
 void main()
 {
     // Material base color (before shading)
+    // Construct the parameters for the palette
+    vec3 a = vec3(0.2, 0.3, 0.4);
+    vec3 b = vec3(0.8, 0.7, 0.8);
+    vec3 c = vec3(1.6, 1.4, 2.7);
+    vec3 d = vec3(0.15, 0.08, 0.21);
+
+    // Compute the colors
+    vec3 Col = a + b * cos(6.28318 * (c * u_Time / 314.159) + d);
+
         vec4 diffuseColor = u_Color;
 
         // Calculate the diffuse term for Lambert shading
@@ -41,5 +50,6 @@ void main()
                                                             //lit by our point light are not completely black.
 
         // Compute final shaded color
-        out_Col = vec4(diffuseColor.rgb * lightIntensity, diffuseColor.a);
+        // out_Col = vec4(diffuseColor.rgb * lightIntensity, diffuseColor.a);
+        out_Col = vec4(Col, 1);
 }
